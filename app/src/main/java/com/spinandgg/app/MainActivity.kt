@@ -3,6 +3,7 @@ package com.spinandgg.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.spinandgg.app.ui.logica.GestorApuestas
 
 import com.spinandgg.app.ui.navegacion.AppNavHost
 import com.spinandgg.app.ui.theme.SpinAndGGTheme
@@ -14,6 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SpinAndGGTheme {
                 GestorUsuarios.cargarUsuarios()
+                GestorApuestas.cargarApuestas()
                 AppNavHost()
             }
         }
