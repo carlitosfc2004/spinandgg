@@ -39,6 +39,7 @@ import com.spinandgg.app.ui.logica.GestorUsuarios
 fun CargarLogin(navController: NavHostController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -131,16 +132,29 @@ fun CargarLogin(navController: NavHostController) {
                         .fillMaxWidth()
                         .offset(y = (-60).dp)
                 )
+                if (errorMessage.isNotEmpty()) {
+                    Text(
+                        text = errorMessage,
+                        color = Color.Red,
+                        modifier = Modifier.offset(y = (-55).dp)
+                    )
+                }
+
                 Button(
                     onClick = {
                         var usuarioActivo = GestorUsuarios.login(username, password)
-                        if (usuarioActivo != null) {
-                            GestorUsuarios.crearSesion(usuarioActivo)
-                            navController.navigate("rutaHome") {
-                                launchSingleTop = true
+                        if ((password.isNotEmpty()) && (username.isNotEmpty())  ){
+                            if (usuarioActivo != null) {
+                                GestorUsuarios.crearSesion(usuarioActivo)
+                                navController.navigate("rutaHome") {
+                                    launchSingleTop = true
+                                }
+                            } else {
+                                errorMessage = "La contraseña o el usuario estan mal "
                             }
-                        } else {
-                            password = "USUARIO O CONTRASEÑA INCORRECTOS"
+                        }
+                        if ((usuarioActivo?.password == null) || (usuarioActivo?.username == null) ){
+                        errorMessage = "No hay nada escrito en el password o en el usuario "
                         }
                     },
                     modifier = Modifier
