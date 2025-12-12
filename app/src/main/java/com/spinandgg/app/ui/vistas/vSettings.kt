@@ -129,7 +129,7 @@ fun CargarSettings(navController: NavHostController) {
 
             Button(
                 onClick = {},
-                colors = ButtonDefaults.buttonColors(Color(0xFF2D00D4)),
+                colors = ButtonDefaults.buttonColors(Color(0xFF0D0335)),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .width(200.dp)
@@ -146,18 +146,19 @@ fun CargarSettings(navController: NavHostController) {
 
             Column (
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(top = 20.dp)
             ) {
                 Text(
                     text = "Cerrar Sesión",
-                    color = Color(0xFF2D00D4),
+                    color = Color(0xFF0D0335),
                     fontSize = 16.sp,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .offset(y = (60).dp)
                         .clickable {
-                            navController.navigate("rutaHome") {
+                            navController.navigate("rutaLogin") {
                                 launchSingleTop = true
                             }
                         }

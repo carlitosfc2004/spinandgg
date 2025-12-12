@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -65,7 +66,7 @@ fun CargarLogin(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 32.dp), // Añade padding lateral para los inputs
+                    .padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
@@ -81,72 +82,75 @@ fun CargarLogin(navController: NavHostController) {
                     color = Color.White,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 4.dp, start = 10.dp) // Pequeño espacio debajo
+                        .padding(bottom = 4.dp, start = 10.dp)
                         .offset(y = (-60).dp)
                 )
                 TextField(
                     value = username,
-                    onValueChange = { username = it },
+                    onValueChange = { newValue ->
+                        // Filtrar saltos de línea y caracteres de nueva línea
+                        username = newValue.replace("\n", "").replace("\r", "")
+                    },
                     label = { Text("Usuario") },
                     shape = RoundedCornerShape(20.dp),
+                    singleLine = true,
+                    maxLines = 1,
                     colors = TextFieldDefaults.colors(
-                        // Indicador (la línea debajo) en estado normal y enfocado (focused)
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxWidth()
                         .offset(y = (-60).dp)
-
                 )
                 Text(
                     text = "Contraseña",
                     color = Color.White,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 15.dp, bottom = 4.dp, start = 10.dp) // Pequeño espacio debajo
+                        .padding(top = 15.dp, bottom = 4.dp, start = 10.dp)
                         .offset(y = (-60).dp)
                 )
                 TextField(
                     value = password,
-                    onValueChange = { password = it },
+                    onValueChange = { newValue ->
+                        // Filtrar saltos de línea y caracteres de nueva línea
+                        password = newValue.replace("\n", "").replace("\r", "")
+                    },
                     label = { Text("Contraseña") },
                     shape = RoundedCornerShape(20.dp),
+                    singleLine = true,
+                    maxLines = 1,
                     colors = TextFieldDefaults.colors(
-                        // Indicador (la línea debajo) en estado normal y enfocado (focused)
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxWidth()
                         .offset(y = (-60).dp)
                 )
                 Button(
                     onClick = {
-                        // TODO Aquí iría la función para iniciar sesión
                         if (GestorUsuarios.login(username, password)) {
                             navController.navigate("rutaHome") {
                                 launchSingleTop = true
                             }
                         } else {
                             password = "USUARIO O CONTRASEÑA INCORRECTOS"
-                            navController.navigate("rutaHome") {//borrar luego TODO
+                            /*navController.navigate("rutaHome") {
                                 launchSingleTop = true
-                            }
+                            }*/
                         }
                     },
                     modifier = Modifier
                         .width(150.dp)
                         .offset(y = (-35).dp)
                         .height(50.dp),
-
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF007ACC), // Ejemplo: Un azul brillante (usa el color que quieras)
-                        contentColor = Color.White        // Color del texto (CONECTARSE)
+                        containerColor = Color(0xFF007ACC),
+                        contentColor = Color.White
                     )
                 ) {
                     Text("CONECTARSE")
@@ -155,26 +159,22 @@ fun CargarLogin(navController: NavHostController) {
                     text = "¿No tienes una cuenta?",
                     color = Color.White,
                     modifier = Modifier.offset(y = (-25).dp)
-
                 )
                 Text(
                     text = "Créate una.",
                     color = Color.Yellow,
                     modifier = Modifier.offset(y = (-25).dp)
-
                 )
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 50.dp, end = 16.dp, bottom = 8.dp), // Espaciado del borde
-
-
+                        .padding(start = 50.dp, end = 16.dp, bottom = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = "Los juegos de azar están prohibidos para menores",
-                        color = Color.Gray, // Usamos un gris para que sea discreto
-                        fontSize = 10.sp // Letra muy pequeña
+                        color = Color.Gray,
+                        fontSize = 10.sp
                     )
                 }
             }

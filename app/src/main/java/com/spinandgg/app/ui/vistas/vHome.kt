@@ -45,12 +45,11 @@ fun CargarHome(navController: NavHostController) {
 
         }
 
-        // 2. Parte Media: Azul (60%)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.8f) // Ocupa el 60% de la altura
-                .background(Color(0xFF00d0337))
+                .background(Color(0xFF0D0335))
         ) {
             // Aquí irá el contenido principal o imagen
         }
