@@ -133,15 +133,14 @@ fun CargarLogin(navController: NavHostController) {
                 )
                 Button(
                     onClick = {
-                        if (GestorUsuarios.login(username, password)) {
+                        var usuarioActivo = GestorUsuarios.login(username, password)
+                        if (usuarioActivo != null) {
+                            GestorUsuarios.crearSesion(usuarioActivo)
                             navController.navigate("rutaHome") {
                                 launchSingleTop = true
                             }
                         } else {
                             password = "USUARIO O CONTRASEÑA INCORRECTOS"
-                            /*navController.navigate("rutaHome") {
-                                launchSingleTop = true
-                            }*/
                         }
                     },
                     modifier = Modifier

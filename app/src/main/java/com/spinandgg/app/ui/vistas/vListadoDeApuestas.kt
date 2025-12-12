@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.spinandgg.app.ui.componentes.AgregarNavBar
+import com.spinandgg.app.ui.componentes.AgregarTarjetaApuesta
 
 @Composable
 fun CargarListadoDeApuestas(navController: NavHostController) {
@@ -46,13 +47,18 @@ fun CargarListadoDeApuestas(navController: NavHostController) {
         }
 
         // 2. Parte Media: Azul (60%)
-        Box(
+        Column (
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.8f) // Ocupa el 60% de la altura
                 .background(Color(0xFF0D0335))
         ) {
             // Aquí irá el contenido principal o imagen
+            AgregarTarjetaApuesta()
+            AgregarTarjetaApuesta()
+            AgregarTarjetaApuesta()
+            AgregarTarjetaApuesta()
+            //TODO ARREGLAR ESTA PUTISIMA Y REVERANDA MIERDA
         }
 
         // 3. Parte Inferior: Negra (20%)
